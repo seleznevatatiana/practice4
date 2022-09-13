@@ -11,7 +11,6 @@ public class ResultDAO {
     //SQL文を準備
     public static String SQL_SELECT_FROM_RESULT = "SELECT omikuji_id FROM result WHERE birthday = ? AND uranai_date =?";
     public static String SQL_INSERT_RESULT = "INSERT INTO result VALUES (?, ?, ?, ?, current_timestamp, ?, current_timestamp)";
-
     /**
      * 結果テーブルからデータ取得
      * @return omikujiId
