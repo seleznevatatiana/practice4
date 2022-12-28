@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import action.ResultAction;
 import db.DBManager;
 
 public class OmikujiDAO {
@@ -126,7 +127,7 @@ public class OmikujiDAO {
 
             //resultsetから値の取り出し方
             while (resultSet2.next()) {
-                omikuji = BirthdayInputServlet.getInstance(resultSet2.getString("unsei_name"));
+                omikuji = ResultAction.getInstance(resultSet2.getString("unsei_name"));
                 omikuji.setUnsei();
                 omikuji.setOmikujiId(omikujiId);
                 omikuji.setNegaigoto(resultSet2.getString("negaigoto"));

@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+.buttonwrap{
+    text-align: center;
+    padding: 20px 0;
+}
+form input[type="button"],form input[type="submit"]{
+    display:inline-block;
+    background:#d13415;
+    padding:10px;
+    text-align:center;
+    color:#FFF;
+    margin:5px;
+    border:1px solid;
+    cursor:pointer;
+    width: 150px;
+}
+form input[type="button"]{
+    background: #f2f2f2;
+    color: #333;
+    border: none;
+}

@@ -29,7 +29,9 @@
   <!-- ================================================ Form Bean Definitions -->
 
   <form-beans>
-    <form-bean name="omikujiForm" type="omikuji.OmikujiForm"/>
+    <form-bean name="ResultAction" type="form.ResultForm"/>
+    <form-bean name="ListAction" type="form.ListForm"/>
+    <form-bean name="RateAction" type="form.RateForm"/>
   </form-beans>
 
 
@@ -47,7 +49,7 @@
   <global-forwards>
     <!-- Default forward to "Welcome" action -->
     <!-- Demonstrates using index.jsp to forward -->
-    <forward name="welcome" path="/Welcome.do" />
+    <forward name="login" path="/Pages/Login.jsp" />
   </global-forwards>
 
   <!-- <action-mappings>
@@ -57,11 +59,25 @@
      <forward name="omikuji" path="/Omikuji.jsp" />
     </action> -->
      <action-mappings>
-    <action path="/omikuji/OmikujiForm"
-            type="omikuji.OmikujiForm"
-            name="omikujiForm"
-            scope="request">
-      <forward name="input" path="/omikuji/OmikujiForm.jsp" />
+    <action path="/result"
+            type="action.ResultAction"
+            name="ResultAction"
+            scope="session">
+      <forward name="success" path="/Pages/Result.jsp" />
+    </action>
+
+    <action path="/list"
+            type="action.ListAction"
+            name="ListAction"
+            scope="session">
+      <forward name="success" path="/Pages/List.jsp" />
+    </action>
+
+    <action path="/rate"
+            type="action.RateAction"
+            name="RateAction"
+            scope="session">
+      <forward name="success" path="/Pages/Rate.jsp" />
     </action>
   </action-mappings>
 
