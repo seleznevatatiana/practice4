@@ -30,7 +30,7 @@
 
   <form-beans>
     <form-bean name="ResultAction" type="form.ResultForm"/>
-    <form-bean name="ListAction" type="form.ListForm"/>
+    <form-bean name="ListAction" type="form.ResultForm"/>
     <form-bean name="RateAction" type="form.RateForm"/>
   </form-beans>
 

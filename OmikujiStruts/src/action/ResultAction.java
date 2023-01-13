@@ -9,6 +9,7 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -22,7 +23,6 @@ import omikuji.Chukichi;
 import omikuji.Daikichi;
 import omikuji.Kichi;
 import omikuji.Kyo;
-import omikuji.Omikuji;
 import omikuji.OmikujiDAO;
 import omikuji.ResultDAO;
 import omikuji.Shokichi;
@@ -84,7 +84,7 @@ public class ResultAction extends Action {
               System.out.println(omikujiId);
 
               // omikujiIdを元におみくじ情報を取得
-              Omikuji omikuji = OmikujiDAO.selectFromOmikuji(omikujiId);
+              ResultForm omikuji = OmikujiDAO.selectFromOmikuji(omikujiId);
               //falseの場合はデータ登録する
               if (!resultFlag) {
                   //resultテーブルにデータを登録
@@ -96,13 +96,16 @@ public class ResultAction extends Action {
               resultForm.setAkinai(omikuji.getAkinai());
               resultForm.setGakumon(omikuji.getGakumon());
 
-              request.setAttribute("resultForm", resultForm);
+            //セッションを取得
+          HttpSession session = request.getSession();
+          session.setAttribute("resultForm", resultForm);
+//              request.setAttribute("resultForm", resultForm);
               return mapping.findForward("success");
           }
 
         //Omikujiクラスをnewするためのメソッド
-          public static Omikuji getInstance(String unseimei) {
-              Omikuji omikuji = null;
+          public static ResultForm getInstance(String unseimei) {
+              ResultForm omikuji = null;
               switch (unseimei) {
               //大吉の場合
               case "大吉":

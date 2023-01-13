@@ -1,6 +1,8 @@
 package omikuji;
 
-public class Shokichi extends Omikuji {
+import form.ResultForm;
+
+public class Shokichi extends ResultForm  {
 
     @Override
     public void setUnsei() {

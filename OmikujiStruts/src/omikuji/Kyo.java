@@ -1,6 +1,8 @@
 package omikuji;
 
-public class Kyo extends Omikuji {
+import form.ResultForm;
+
+public class Kyo extends ResultForm {
 
     @Override
     public void setUnsei() {

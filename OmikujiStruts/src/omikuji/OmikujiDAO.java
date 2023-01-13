@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 
 import action.ResultAction;
 import db.DBManager;
+import form.ResultForm;
 
 public class OmikujiDAO {
 
@@ -106,12 +107,12 @@ public class OmikujiDAO {
      * おみくじテーブルから一つの結果を取得
      * @return omikuji インスタンス
      */
-    public static Omikuji selectFromOmikuji(String omikujiId) {
+    public static ResultForm selectFromOmikuji(String omikujiId) {
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        Omikuji omikuji = null;
+        ResultForm omikuji = null;
 
         try {
 
