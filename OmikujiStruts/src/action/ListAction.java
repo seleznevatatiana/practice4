@@ -33,7 +33,7 @@ public class ListAction extends Action {
       //セッションを取得
     HttpSession session = request.getSession();
     session.setAttribute("resultForm", resultForm);
-//        request.setAttribute("resultForm", resultForm);
+        request.setAttribute("resultForm", resultForm);
         return mapping.findForward("success");
 
     }
