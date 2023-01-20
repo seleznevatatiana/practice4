@@ -32,7 +32,6 @@ public class ListAction extends Action {
                 return mapping.findForward("result");
                 break;
             }
-
         }
         return mapping.findForward("success");
 
