@@ -1,5 +1,5 @@
-<%@ page import= "form.ResultForm" %>
-<jsp:useBean id="resultForm" class="form.ResultForm" scope="session" />
+<%@ page import= "form.ListForm" %>
+<jsp:useBean id="listForm" class="form.ListForm" scope="request" />
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -13,18 +13,18 @@
 <body style="background-color:pink">
 <table border="1">
     <tr>
-      <th>誕生日</th>
       <th>占い日</th>
-      <th>結果</th>
+      <th>運勢</th>
+      <th>願い事</th>
+      <th>商い</th>
+      <th>学問</th>
     </tr>
     <tr>
-      <td><%= resultForm.getBirthday() %></td>
-      <td><%= resultForm.getCreatedDate() %></td>
-      <td>運勢：<%= resultForm.getUnsei() %><br>
-              願い事：<%=resultForm.getNegaigoto()%><br>
-              商い：<%=resultForm.getAkinai()%><br>
-              学問：<%=resultForm.getGakumon()%><br>
-     </td>
+      <td><%= listForm.getUranaiDate() %></td>
+      <td><%= listForm.getUnsei() %></td>
+      <td><%= listForm.getNegaigoto() %></td>
+      <td><%= listForm.getAkinai() %></td>
+      <td><%= listForm.getGakumon() %></td>
     </tr>
   </table>
 <form action="/OmikujiStruts/result.do" method="post">

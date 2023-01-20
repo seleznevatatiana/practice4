@@ -5,6 +5,7 @@ import org.apache.struts.action.ActionForm;
 public class ListForm extends ActionForm {
 
     private String birthday;
+    private String uranaiDate;
     public String negaigoto;
     public String akinai;
     public String gakumon;
@@ -16,18 +17,32 @@ public class ListForm extends ActionForm {
     public java.sql.Timestamp createdDate;
 
     /**
-    * @return unsei
+    * @return birthday
     */
     public String getBirthday() {
         return birthday;
     }
 
     /**
-     * @param unsei セットする unsei
+     * @param birthday セットする birthday
      */
     public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
+
+    /**
+     * @return uranaiDate
+     */
+     public String getUranaiDate() {
+         return uranaiDate;
+     }
+
+     /**
+      * @param uranaiDate セットする uranaiDate
+      */
+     public void setUranaiDate(String uranaiDate) {
+         this.uranaiDate = uranaiDate;
+     }
 
     public void setUnsei() {
     }

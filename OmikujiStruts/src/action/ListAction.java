@@ -2,38 +2,38 @@ package action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import form.ResultForm;
-import omikuji.OmikujiDAO;
+import omikuji.ResultDAO;
 
 public class ListAction extends Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-      //omikujiIdの宣言
+        //omikujiIdの宣言
         String omikujiId = null;
+        String birthday = null;
 
-        ResultForm resultForm=(ResultForm)form;
+        while (birthday != null) {
+            ResultDAO.selectFromResultForList(birthday);
 
-        ResultForm omikuji = OmikujiDAO.selectFromOmikuji(omikujiId);
-        resultForm.setBirthday(omikuji.getBirthday());
-        resultForm.setCreatedDate(omikuji.getCreatedDate());
-        resultForm.setUnsei(omikuji.getUnsei());
-        resultForm.setNegaigoto(omikuji.getNegaigoto());
-        resultForm.setAkinai(omikuji.getAkinai());
-        resultForm.setGakumon(omikuji.getGakumon());
+            listForm.setUnsei(list.getUnsei());
+            listForm.setNegaigoto(list.getNegaigoto());
+            listForm.setAkinai(list.getAkinai());
+            listForm.setGakumon(list.getGakumon());
 
-      //セッションを取得
-    HttpSession session = request.getSession();
-    session.setAttribute("resultForm", resultForm);
-        request.setAttribute("resultForm", resultForm);
+            if (birthday == null) {
+                request.setAttribute("errorMsg", "*結果がありません");
+                return mapping.findForward("result");
+                break;
+            }
+
+        }
         return mapping.findForward("success");
 
     }
