@@ -8,12 +8,14 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import form.ListForm;
 import omikuji.ResultDAO;
 
 public class ListAction extends Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+        ListForm listForm=(ListForm)form;
 
         //omikujiIdの宣言
         String omikujiId = null;
@@ -22,16 +24,17 @@ public class ListAction extends Action {
         while (birthday != null) {
             ResultDAO.selectFromResultForList(birthday);
 
-            listForm.setUnsei(list.getUnsei());
-            listForm.setNegaigoto(list.getNegaigoto());
-            listForm.setAkinai(list.getAkinai());
-            listForm.setGakumon(list.getGakumon());
+            listForm.setUnsei(listForm.getUnsei());
+            listForm.setNegaigoto(listForm.getNegaigoto());
+            listForm.setAkinai(listForm.getAkinai());
+            listForm.setGakumon(listForm.getGakumon());
 
-            if (birthday == null) {
-                request.setAttribute("errorMsg", "*結果がありません");
-                return mapping.findForward("result");
-                break;
-            }
+
+//            if (birthday == null) {
+//                request.setAttribute("errorMsg", "*結果がありません");
+//                return mapping.findForward("result");
+//                break;
+//            }
         }
         return mapping.findForward("success");
 

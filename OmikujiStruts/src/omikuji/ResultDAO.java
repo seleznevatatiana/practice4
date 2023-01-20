@@ -70,7 +70,7 @@ public class ResultDAO {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         String omikujiId = null;
-        ListForm list = null;
+        ListForm listForm = null;
 
         try {
 
@@ -88,11 +88,11 @@ public class ResultDAO {
           //resultsetから値の取り出し方
             while (resultSet.next()) {
                 omikujiId = rs.getString("omikuji_id");
-                list.setUranaiDate(resultSet.getString("uranai_date"));
-                list.setUnsei(resultSet.getString("unsei"));
-                list.setNegaigoto(resultSet.getString("negaigoto"));
-                list.setAkinai(resultSet.getString("akinai"));
-                list.setGakumon(resultSet.getString("gakumon"));
+                listForm.setUranaiDate(resultSet.getString("uranai_date"));
+                listForm.setUnsei(resultSet.getString("unsei"));
+                listForm.setNegaigoto(resultSet.getString("negaigoto"));
+                listForm.setAkinai(resultSet.getString("akinai"));
+                listForm.setGakumon(resultSet.getString("gakumon"));
             }
         }
         catch (Exception e) {
@@ -111,7 +111,7 @@ public class ResultDAO {
                 e.printStackTrace();
             }
         }
-        return list;
+        return listForm;
     }
 
     /**
