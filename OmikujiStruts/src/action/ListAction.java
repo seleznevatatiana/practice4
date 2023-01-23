@@ -19,7 +19,7 @@ public class ListAction extends Action {
 
         //omikujiIdの宣言
         String omikujiId = null;
-        String birthday = null;
+        String birthday =listForm.getBirthday();
 
         while (birthday != null) {
             ResultDAO.selectFromResultForList(birthday);
