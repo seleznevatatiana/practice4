@@ -6,12 +6,14 @@ import java.sql.ResultSet;
 
 import db.DBManager;
 import form.ListForm;
+import form.RateForm;
 
 public class ResultDAO {
 
     //SQL文を準備
     public static String SQL_SELECT_FROM_RESULT = "SELECT omikuji_id FROM result WHERE birthday = ? AND uranai_date =?";
     public static String SQL_SELECT_FROM_RESULT_FOR_LIST = "SELECT r.uranai_date, u.unsei_name, o.negaigoto, o.akinai, o.gakumon FROM result r INNER JOIN omikuji o ON r.omikuji_id = o.omikuji_id INNER JOIN unseimaster u ON o.unsei_id = u.unsei_id WHERE r.birthday = ?";
+    public static String SQL_SELECT_FROM_RESULT_FOR_RATE = "SELECT u.unsei_name FROM result r INNER JOIN omikuji o ON r.omikuji_id = o.omikuji_id INNER JOIN unseimaster u ON o.unsei_id = u.unsei_id WHERE r.birthday = ?";
     public static String SQL_INSERT_RESULT = "INSERT INTO result VALUES (?, ?, ?, ?, current_timestamp, ?, current_timestamp)";
     /**
      * 結果テーブルからデータ取得
@@ -69,7 +71,6 @@ public class ResultDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        String omikujiId = null;
         ListForm listForm = null;
 
         try {
@@ -86,13 +87,13 @@ public class ResultDAO {
             rs = preparedStatement.executeQuery();
 
           //resultsetから値の取り出し方
-            while (resultSet.next()) {
-                omikujiId = rs.getString("omikuji_id");
-                listForm.setUranaiDate(resultSet.getString("uranai_date"));
-                listForm.setUnsei(resultSet.getString("unsei"));
-                listForm.setNegaigoto(resultSet.getString("negaigoto"));
-                listForm.setAkinai(resultSet.getString("akinai"));
-                listForm.setGakumon(resultSet.getString("gakumon"));
+            while (rs.next()) {
+                birthday = rs.getString("birthday");
+                listForm.setUranaiDate(rs.getString("uranai_date"));
+                listForm.setUnsei(rs.getString("unsei"));
+                listForm.setNegaigoto(rs.getString("negaigoto"));
+                listForm.setAkinai(rs.getString("akinai"));
+                listForm.setGakumon(rs.getString("gakumon"));
             }
         }
         catch (Exception e) {
@@ -112,6 +113,55 @@ public class ResultDAO {
             }
         }
         return listForm;
+    }
+
+    /**
+     * 結果テーブルからデータ取得
+     * @return birthday
+     */
+    public static RateForm selectFromResultForRate(String birthday) {
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        RateForm rateForm = null;
+
+        try {
+
+            //Resultテーブルから誕生日と占い日が一致する場合
+            // DBに接続
+            connection = DBManager.getConnection();
+            // ステートメントを作成
+            preparedStatement = connection.prepareStatement(SQL_SELECT_FROM_RESULT_FOR_RATE);
+            //入力値をバインド
+            preparedStatement.setString(1, birthday);
+            // SQL文を実行
+            ResultSet rs = null;
+            rs = preparedStatement.executeQuery();
+
+          //resultsetから値の取り出し方
+            while (rs.next()) {
+                birthday = rs.getString("birthday");
+                rateForm.setUnsei(rs.getString("unsei"));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                // ResultSetをクローズ
+                DBManager.close(resultSet);
+                // Statementをクローズ
+                DBManager.close(preparedStatement);
+                // DBとの接続を切断
+                DBManager.close(connection);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return rateForm;
     }
 
     /**
