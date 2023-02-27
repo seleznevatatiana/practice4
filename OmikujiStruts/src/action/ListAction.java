@@ -20,10 +20,12 @@ public class ListAction extends Action {
         //omikujiIdの宣言
         String omikujiId = null;
         String birthday =listForm.getBirthday();
+        birthday = request.getParameter("birthday");
 
         while (birthday != null) {
             ResultDAO.selectFromResultForList(birthday);
 
+            listForm.setUnsei(listForm.getUranaiDate());
             listForm.setUnsei(listForm.getUnsei());
             listForm.setNegaigoto(listForm.getNegaigoto());
             listForm.setAkinai(listForm.getAkinai());
@@ -39,4 +41,5 @@ public class ListAction extends Action {
         return mapping.findForward("success");
 
     }
+
 }

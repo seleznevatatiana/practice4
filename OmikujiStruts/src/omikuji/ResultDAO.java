@@ -88,13 +88,14 @@ public class ResultDAO {
 
           //resultsetから値の取り出し方
             while (rs.next()) {
-                birthday = rs.getString("birthday");
+                listForm.setBirthday(birthday);
                 listForm.setUranaiDate(rs.getString("uranai_date"));
                 listForm.setUnsei(rs.getString("unsei"));
                 listForm.setNegaigoto(rs.getString("negaigoto"));
                 listForm.setAkinai(rs.getString("akinai"));
                 listForm.setGakumon(rs.getString("gakumon"));
             }
+            System.out.println(birthday);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -143,6 +144,7 @@ public class ResultDAO {
             while (rs.next()) {
                 birthday = rs.getString("birthday");
                 rateForm.setUnsei(rs.getString("unsei"));
+
             }
         }
         catch (Exception e) {
