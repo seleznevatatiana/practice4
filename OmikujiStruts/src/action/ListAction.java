@@ -2,6 +2,7 @@ package action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -17,27 +18,26 @@ public class ListAction extends Action {
             throws Exception {
         ListForm listForm=(ListForm)form;
 
-        //omikujiIdの宣言
-        String omikujiId = null;
         String birthday =listForm.getBirthday();
         birthday = request.getParameter("birthday");
 
-        while (birthday != null) {
-            ResultDAO.selectFromResultForList(birthday);
+        if (birthday != null) {
+           listForm =   ResultDAO.selectFromResultForList(birthday);
 
-            listForm.setUnsei(listForm.getUranaiDate());
-            listForm.setUnsei(listForm.getUnsei());
-            listForm.setNegaigoto(listForm.getNegaigoto());
-            listForm.setAkinai(listForm.getAkinai());
-            listForm.setGakumon(listForm.getGakumon());
+//            listForm.setUnsei(listForm.getUranaiDate());
+//            listForm.setUnsei(listForm.getUnsei());
+//            listForm.setNegaigoto(listForm.getNegaigoto());
+//            listForm.setAkinai(listForm.getAkinai());
+//            listForm.setGakumon(listForm.getGakumon());
 
-
-//            if (birthday == null) {
-//                request.setAttribute("errorMsg", "*結果がありません");
-//                return mapping.findForward("result");
-//                break;
-//            }
+            if (listForm == null) {
+                request.setAttribute("errorMsg", "*結果がありません");
+                return mapping.findForward("result");
+            }
         }
+        //セッションを取得
+        HttpSession session = request.getSession();
+        session.setAttribute("listForm", listForm);
         return mapping.findForward("success");
 
     }

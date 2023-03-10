@@ -3,6 +3,8 @@ package omikuji;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import db.DBManager;
 import form.ListForm;
@@ -72,6 +74,7 @@ public class ResultDAO {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         ListForm listForm = null;
+        List <ListForm> list = new ArrayList<ListForm>();
 
         try {
 
@@ -94,8 +97,9 @@ public class ResultDAO {
                 listForm.setNegaigoto(rs.getString("negaigoto"));
                 listForm.setAkinai(rs.getString("akinai"));
                 listForm.setGakumon(rs.getString("gakumon"));
+
+                list.add(listForm);
             }
-            System.out.println(birthday);
         }
         catch (Exception e) {
             e.printStackTrace();
