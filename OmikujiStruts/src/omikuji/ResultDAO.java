@@ -73,7 +73,7 @@ public class ResultDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        ListForm listForm = null;
+        ListForm listForm= null;
         List <ListForm> list = new ArrayList<ListForm>();
 
         try {
@@ -83,7 +83,7 @@ public class ResultDAO {
             connection = DBManager.getConnection();
             // ステートメントを作成
             preparedStatement = connection.prepareStatement(SQL_SELECT_FROM_RESULT_FOR_LIST);
-            //入力値をバインド
+//            //入力値をバインド
             preparedStatement.setString(1, birthday);
             // SQL文を実行
             ResultSet rs = null;

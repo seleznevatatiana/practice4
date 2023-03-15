@@ -4,8 +4,8 @@ import org.apache.struts.action.ActionForm;
 
 public class ListForm extends ActionForm {
 
-    private String birthday;
-    private String uranaiDate;
+    public String birthday;
+    public String uranaiDate;
     public String negaigoto;
     public String akinai;
     public String gakumon;

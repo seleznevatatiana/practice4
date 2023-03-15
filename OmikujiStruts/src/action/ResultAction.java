@@ -1,5 +1,8 @@
 package action;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -61,13 +64,13 @@ public class ResultAction extends Action {
               int count = OmikujiDAO.selectCountFromOmikuji();
               //データがない場合はcsvファイルから取得
               if (count == 0) {
-//                  String realPath = this.getServlet().getServletContext().getRealPath("/WEB-INF/fortune.csv");
-//                  File logFile = new File(realPath);
-//                  BufferedReader br = new BufferedReader(new FileReader(logFile));
-//                  count = CSVReader.csvRead(realPath);
                   String realPath = this.getServlet().getServletContext().getRealPath("/WEB-INF/fortune.csv");
+                  File logFile = new File(realPath);
+                  BufferedReader br = new BufferedReader(new FileReader(logFile));
                   count = CSVReader.csvRead(realPath);
               }
+              System.out.println(count);
+
               // resultデータ有無フラグ
               boolean resultFlag = false;
 
@@ -98,7 +101,6 @@ public class ResultAction extends Action {
             //セッションを取得
           HttpSession session = request.getSession();
           session.setAttribute("resultForm", resultForm);
-//              request.setAttribute("resultForm", resultForm);
               return mapping.findForward("success");
           }
 
