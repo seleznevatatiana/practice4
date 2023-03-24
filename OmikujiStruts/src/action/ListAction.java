@@ -10,28 +10,31 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import form.ListForm;
-import omikuji.ResultDAO;
+import omikuji.ResultStrutsDAO;
 
 public class ListAction extends Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        String birthday = null;
+        String birthday = null;;
+
+        ListForm listForm;
+//        String birthday = null;
         //        = listForm.getBirthday();
         //        birthday = request.getParameter("birthday");
         //
         //        if (birthday != null) {
 
-        ListForm listForm = ResultDAO.selectFromResultForList(birthday);
+       listForm = ResultStrutsDAO.selectFromResultForList(birthday);
 
         System.out.println(birthday);
-
-//        listForm.setUnsei(listForm.getUranaiDate());
-//        listForm.setUnsei(listForm.getUnsei());
-//        listForm.setNegaigoto(listForm.getNegaigoto());
-//        listForm.setAkinai(listForm.getAkinai());
-//        listForm.setGakumon(listForm.getGakumon());
+//
+        listForm.setUnsei(listForm.getUranaiDate());
+        listForm.setUnsei(listForm.getUnsei());
+        listForm.setNegaigoto(listForm.getNegaigoto());
+        listForm.setAkinai(listForm.getAkinai());
+        listForm.setGakumon(listForm.getGakumon());
 
         //            if (listForm == null) {
         //                request.setAttribute("errorMsg", "*結果がありません");

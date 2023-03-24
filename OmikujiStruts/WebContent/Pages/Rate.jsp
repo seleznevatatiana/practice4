@@ -1,5 +1,5 @@
 <%@ page import= "form.RateForm" %>
-<jsp:useBean id="rateForm" class="form.RateForm" scope="request" />
+<jsp:useBean id="rateForm" class="form.RateForm" scope="session" />
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>

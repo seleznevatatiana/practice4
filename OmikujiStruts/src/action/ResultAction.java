@@ -24,7 +24,7 @@ import omikuji.Daikichi;
 import omikuji.Kichi;
 import omikuji.Kyo;
 import omikuji.OmikujiDAO;
-import omikuji.ResultDAO;
+import omikuji.ResultStrutsDAO;
 import omikuji.Shokichi;
 import omikuji.Suekichi;
 
@@ -58,7 +58,7 @@ public class ResultAction extends Action {
 
 
               //入力した誕生日の結果がある場合はresultテーブルから取得
-              omikujiId = ResultDAO.selectFromResult(birthday, uranaiDate);
+              omikujiId = ResultStrutsDAO.selectFromResult(birthday, uranaiDate);
 
               //データ有無のチェック
               int count = OmikujiDAO.selectCountFromOmikuji();
@@ -90,7 +90,7 @@ public class ResultAction extends Action {
               //falseの場合はデータ登録する
               if (!resultFlag) {
                   //resultテーブルにデータを登録
-                  ResultDAO.insertResult(birthday, uranaiDate, omikujiId);
+                  ResultStrutsDAO.insertResult(birthday, uranaiDate, omikujiId);
               }
 
               resultForm.setUnsei(omikuji.getUnsei());
