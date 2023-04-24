@@ -36,8 +36,6 @@ public class ResultAction extends Action {
               ResultForm resultForm=(ResultForm)form;
               String birthday =resultForm.getBirthday();
 
-              birthday = request.getParameter("birthday");
-
               //誕生日の形式が正しいかどうかをチェックする
               boolean check;
               CheckBirthday checkBirthday = new CheckBirthday(); //staticにできるならstaticメソッドを使った方がいい、newは自分専用の領域を作るという意味
@@ -101,6 +99,7 @@ public class ResultAction extends Action {
             //セッションを取得
           HttpSession session = request.getSession();
           session.setAttribute("resultForm", resultForm);
+          session.setAttribute("birthday", birthday);
               return mapping.findForward("success");
           }
 

@@ -16,16 +16,18 @@ public class RateAction extends Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+
         String birthday = null;
 
-        RateForm rateForm=(RateForm)form;
+        HttpSession session = request.getSession();
+        birthday = (String) session.getAttribute("birthday");
 
-ResultStrutsDAO.selectFromResultForRate(birthday);
+        RateForm rateForm = ResultStrutsDAO.selectFromResultForRate(birthday);
 
-HttpSession session = request.getSession();
-session.setAttribute("rateForm", rateForm);
-return mapping.findForward("success");
-
+      //セッションを取得
+        session = request.getSession();
+        session.setAttribute("rateForm", rateForm);
+        return mapping.findForward("success");
 
     }
 }

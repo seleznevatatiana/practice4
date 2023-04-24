@@ -1,5 +1,8 @@
 package form;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.struts.action.ActionForm;
 
 public class ListForm extends ActionForm {
@@ -15,6 +18,7 @@ public class ListForm extends ActionForm {
     public java.sql.Timestamp updatedDate;
     public String creator;
     public java.sql.Timestamp createdDate;
+    public String unseiName;
 
     /**
     * @return birthday
@@ -188,5 +192,28 @@ public class ListForm extends ActionForm {
     public void setCreatedDate(java.sql.Timestamp createdDate) {
         this.createdDate = createdDate;
     }
+
+    /**
+     * @return unseiName
+     */
+     public String getUnseiName() {
+         return unseiName;
+     }
+
+     /**
+      * @param unseiName セットする unseiName
+      */
+     public void setUnseiName(String unseiName) {
+         this.unseiName = unseiName;
+     }
+
+     private  List<ListForm> allList = new ArrayList<ListForm>();
+
+     public List<ListForm> getAllList() {
+         return allList;
+     }
+     public void addToAllList(ListForm listForm){
+         this.allList.add(listForm);
+             }
 
 }

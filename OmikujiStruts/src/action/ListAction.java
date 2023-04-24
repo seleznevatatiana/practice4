@@ -1,5 +1,7 @@
 package action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,32 +19,29 @@ public class ListAction extends Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        String birthday = null;;
+        String birthday = null;
 
-        ListForm listForm;
-//        String birthday = null;
-        //        = listForm.getBirthday();
-        //        birthday = request.getParameter("birthday");
-        //
-        //        if (birthday != null) {
-
-       listForm = ResultStrutsDAO.selectFromResultForList(birthday);
-
-        System.out.println(birthday);
-//
-        listForm.setUnsei(listForm.getUranaiDate());
-        listForm.setUnsei(listForm.getUnsei());
-        listForm.setNegaigoto(listForm.getNegaigoto());
-        listForm.setAkinai(listForm.getAkinai());
-        listForm.setGakumon(listForm.getGakumon());
-
-        //            if (listForm == null) {
-        //                request.setAttribute("errorMsg", "*結果がありません");
-        //                return mapping.findForward("result");
-        //            }
-        //        }
-        //セッションを取得
         HttpSession session = request.getSession();
+        birthday = (String) session.getAttribute("birthday");
+
+        ListForm listForm = null;
+
+        if (birthday != null) {
+            List<ListForm> list= ResultStrutsDAO.selectFromResultForList(birthday);
+//                    listForm.setUranaiDate(list.getUranaiDate());
+//                    listForm.setUnsei(list.getUnsei());
+//                    listForm.setNegaigoto(list.getNegaigoto());
+//                    listForm.setAkinai(list.getAkinai());
+//                    listForm.setGakumon(list.getGakumon());
+        }
+
+//        if (list == null) {
+//            request.setAttribute("errorMsg", "*結果がありません");
+//            return mapping.findForward("list");
+//        }
+
+        //セッションを取得
+        session = request.getSession();
         session.setAttribute("listForm", listForm);
         return mapping.findForward("success");
 

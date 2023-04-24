@@ -11,6 +11,10 @@
 <title>占い結果の一覧</title>
 </head>
 <body style="background-color:pink">
+<%--  <%String errorMsg = (String) request.getAttribute("errorMsg");
+        if (errorMsg != null) {
+            out.println("<p>" + errorMsg + "</p>");
+        }%> --%>
 <table border="1">
     <tr>
       <th>占い日</th>
@@ -19,6 +23,7 @@
       <th>商い</th>
       <th>学問</th>
     </tr>
+<c:forEach listForm="${listForm}" var="listForm">
     <tr>
       <td><%= listForm.getUranaiDate() %></td>
       <td><%= listForm.getUnsei() %></td>
@@ -26,6 +31,7 @@
       <td><%= listForm.getAkinai() %></td>
       <td><%= listForm.getGakumon() %></td>
     </tr>
+  </c:forEach>
   </table>
 <form action="/OmikujiStruts/result.do" method="post">
 <input type="submit" value="戻る"/>

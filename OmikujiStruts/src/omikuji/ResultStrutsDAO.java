@@ -17,6 +17,7 @@ public class ResultStrutsDAO {
     public static String SQL_SELECT_FROM_RESULT_FOR_LIST = "SELECT r.uranai_date, u.unsei_name, o.negaigoto, o.akinai, o.gakumon FROM result r INNER JOIN omikuji o ON r.omikuji_id = o.omikuji_id INNER JOIN unseimaster u ON o.unsei_id = u.unsei_id WHERE r.birthday = ?";
     public static String SQL_SELECT_FROM_RESULT_FOR_RATE = "SELECT  u.unsei_name, COUNT (*) FROM result r INNER JOIN omikuji o ON r.omikuji_id = o.omikuji_id INNER JOIN unseimaster u ON o.unsei_id = u.unsei_id   WHERE r.birthday = ? GROUP BY  u.unsei_name";
     public static String SQL_INSERT_RESULT = "INSERT INTO result VALUES (?, ?, ?, ?, current_timestamp, ?, current_timestamp)";
+
     /**
      * 結果テーブルからデータ取得
      * @return omikujiId
@@ -66,17 +67,18 @@ public class ResultStrutsDAO {
         }
         return omikujiId;
     }
+
     /**
      * 結果テーブルからデータ取得
      * @return birthday
      */
-    public static ListForm selectFromResultForList(String birthday) {
+    public static List selectFromResultForList(String birthday) {
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         ListForm listForm = new ListForm();
-        List <ListForm> list = new ArrayList<ListForm>();
+        List<ListForm> list = new ArrayList<ListForm>();
 
         try {
 
@@ -85,24 +87,23 @@ public class ResultStrutsDAO {
             connection = DBManager.getConnection();
             // ステートメントを作成
             preparedStatement = connection.prepareStatement(SQL_SELECT_FROM_RESULT_FOR_LIST);
-//            //入力値をバインド
+            //            //入力値をバインド
             preparedStatement.setString(1, birthday);
             // SQL文を実行
             ResultSet rs2 = null;
             rs2 = preparedStatement.executeQuery();
 
-          //resultsetから値の取り出し方
+            //resultsetから値の取り出し方
             while (rs2.next()) {
                 listForm.setBirthday(birthday);
                 listForm.setUranaiDate(rs2.getString("uranai_date"));
-                listForm.setUnsei(rs2.getString("unsei"));
+                listForm.setUnsei(rs2.getString("unsei_name"));
                 listForm.setNegaigoto(rs2.getString("negaigoto"));
                 listForm.setAkinai(rs2.getString("akinai"));
                 listForm.setGakumon(rs2.getString("gakumon"));
 
                 list.add(listForm);
             }
-//            System.out.println(birthday);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -120,7 +121,7 @@ public class ResultStrutsDAO {
                 e.printStackTrace();
             }
         }
-        return listForm;
+        return list;
     }
 
     /**
@@ -148,12 +149,11 @@ public class ResultStrutsDAO {
             ResultSet rs = null;
             rs = preparedStatement.executeQuery();
 
-            rs.next();
-            count = rs.getInt("cnt");
-            birthday = rs.getString("birthday");
-            System.out.println(count);
-            System.out.println(birthday);
-
+            while (rs.next()) {
+                rateForm.setBirthday(birthday);
+                rateForm.setUnsei(rs.getString("unsei_name"));
+                count = rs.getInt("cnt");
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
